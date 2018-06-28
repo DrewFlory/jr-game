@@ -1,0 +1,125 @@
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    background-color: black;
+}
+
+body > div {
+    margin: 0px auto;
+    text-align: center;
+}
+
+.game-data {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+h1 {
+    font-size: 100px;
+    font-family: 'Bangers', cursive;
+    color: #FFB81C;
+    text-align: center;
+    padding-bottom: 3rem;
+}
+
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+header img {
+    transform: rotate(20deg);
+    margin-top: 2rem;
+    width: 130px;
+    height: 160px;
+    padding-left: 20px;
+}
+
+.tile {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.wall {
+    background-color: #FFB81C;
+    border: 2px solid white;
+}
+
+.backboard {
+    text-align: center;
+    background-image: url('../Images/hoop.png');
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: relative;
+}
+
+.jr {
+    text-align: center;
+    background-image: url('../Images/jrhead\ \(3\).png');
+    background-repeat: no-repeat;
+    display: inline-block;
+
+}
+
+.goal {
+    text-align: center;
+    background-image: url('../Images/hennessy\ \(1\).png');
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+
+.ground {
+    width: 50px;
+    height: 50px;
+    background-color: black;
+    display: inline-block;
+}
+
+.score {
+    margin-left: 14rem;
+    font-size: 19px;
+    color: #FFB81C;
+    padding-bottom: 10px;
+    font-weight: bold;
+}
+
+.lives {
+    margin-right: 14rem;
+}
+
+#begin {
+    padding: 30px 60px;
+    background-color: #6F263D;
+    font-weight: bold;
+    border-radius: 7px;
+    border: 1px solid #041E42;
+    font-family: 'Press Start 2P', cursive;
+    color: white;
+    text-decoration: none;
+    font-size: 25px;
+    margin-left: 41%;
+    margin-top: 23%;
+    position: absolute;
+} 
+
+#begin:hover {
+    background-color: #FFB81C;
+}
+
+
+
+
+  
+ 
