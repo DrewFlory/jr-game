@@ -27,7 +27,6 @@ function Game (){
     this.jr= {};
     this.bottle = [];
     this.score = 0;
-
 };
 
 //------------JR constructor function-------------//
@@ -84,13 +83,8 @@ Game.prototype.generateTiles = function(){
     return tilesArray;
 }
 
-//---------Score Function------------//
-
-function updateScore(){
-   game.score = $("score").html();
-}
-
 //-----------Draw board and erase board---------------//
+
 var score = document.getElementsByClassName('score');
 
 Game.prototype.drawBoard = function(){
@@ -114,27 +108,11 @@ Game.prototype.collision = function(){
    
     for(var i = 0; i < game.hoops.length; i++){
         if(game.hoops[i].x === game.jr.x && game.hoops[i].y === game.jr.y){
+            playBaby();
             restartGame();
         }
     }
 }
-
-//------ Sound -------//
-
-// function sound(src) {
-//     this.sound = document.createElement("audio");
-//     this.sound.src = src;
-//     this.sound.setAttribute("preload", "auto");
-//     this.sound.setAttribute("controls", "none");
-//     this.sound.style.display = "none";
-//     document.body.appendChild(this.sound);
-//     this.play = function(){
-//         this.sound.play();
-//     }
-//     this.stop = function(){
-//         this.sound.pause();
-//     }
-//  }
 
 //-------------- WIN ---------------//
 
@@ -149,31 +127,28 @@ Game.prototype.win = function(){
 
 //-------------JR movements---------------//
 
-// var mySound;
-
 Jr.prototype.moveDown = function(){
     
     if (game.gameBoard[game.jr.y+1][game.jr.x] === GROUND) {
         game.gameBoard[game.jr.y][game.jr.x] = GROUND;
         game.jr.y = game.jr.y + 1 ;
         game.gameBoard[game.jr.y][game.jr.x] = this.code;
-      } 
+    } 
     else if(game.gameBoard[game.jr.y+1][game.jr.x] === GOAL){
         game.jr.bottlesDrank += 1;
         console.log(game.score += 50);
+        playAudio();
         game.gameBoard[game.jr.y][game.jr.x] = GROUND;
         game.jr.y = game.jr.y + 1 ;
         game.gameBoard[game.jr.y][game.jr.x] = this.code;
         game.win();
-        // mySound = new sound("../Images/Slurping 2-SoundBible.com-1269549524.wav");
-        // mySound.play();
-      }
+    }
     else if(game.gameBoard[game.jr.y+1][game.jr.x] === 5){
         game.gameBoard[game.jr.y][game.jr.x] = GROUND;
         game.jr.y = game.jr.y + 1 ;
         game.gameBoard[game.jr.y][game.jr.x] = this.code;
         game.lives--;
-      }
+    }
 }
 
 Jr.prototype.moveUp = function(){
@@ -182,25 +157,24 @@ Jr.prototype.moveUp = function(){
         game.gameBoard[game.jr.y][game.jr.x] = GROUND;
         game.jr.y = game.jr.y - 1 ;
         game.gameBoard[game.jr.y][game.jr.x] = this.code;
-      } 
+    } 
 
   else if(game.gameBoard[game.jr.y-1][game.jr.x] === GOAL){
         game.jr.bottlesDrank += 1;
         console.log(game.score += 50);
+        playAudio();
         game.gameBoard[game.jr.y][game.jr.x] = GROUND;
         game.jr.y = game.jr.y - 1 ;
         game.gameBoard[game.jr.y][game.jr.x] = this.code;
         game.win();
-        // mySound = new sound("../Images/Slurping 2-SoundBible.com-1269549524.wav");
-        // mySound.play();
-  }
+    }
 
   else if(game.gameBoard[game.jr.y-1][game.jr.x] === 5){
       game.gameBoard[game.jr.y][game.jr.x] = GROUND;
         game.jr.y = game.jr.y - 1 ;
         game.gameBoard[game.jr.y][game.jr.x] = this.code;
         game.lives--;
-        }
+    }
 }
 
 Jr.prototype.moveLeft = function(){
@@ -214,12 +188,11 @@ Jr.prototype.moveLeft = function(){
   else if(game.gameBoard[game.jr.y][game.jr.x-1] === GOAL){
         game.jr.bottlesDrank += 1;
         console.log(game.score += 50);
+        playAudio();
         game.gameBoard[game.jr.y][game.jr.x] = GROUND;
         game.jr.x = game.jr.x - 1 ;
         game.gameBoard[game.jr.y][game.jr.x] = this.code;
         game.win();
-        // mySound = new sound("../Images/Slurping 2-SoundBible.com-1269549524.wav");
-        // mySound.play();
   }
 
   else if(game.gameBoard[game.jr.y][game.jr.x-1] === 5){
@@ -241,12 +214,11 @@ Jr.prototype.moveLeft = function(){
   else if(game.gameBoard[game.jr.y][game.jr.x+1] === GOAL){
         game.jr.bottlesDrank += 1;
         console.log(game.score += 50);
+        playAudio();
         game.gameBoard[game.jr.y][game.jr.x] = GROUND;
         game.jr.x = game.jr.x + 1 ;
         game.gameBoard[game.jr.y][game.jr.x] = this.code;
         game.win();
-        // mySound = new sound("../Images/Slurping 2-SoundBible.com-1269549524.wav");
-        // mySound.play();
     }
 
   else if(game.gameBoard[game.jr.y][game.jr.x+1] === 5){
@@ -256,8 +228,6 @@ Jr.prototype.moveLeft = function(){
         game.lives--;
         }
 }
-
-
 
 //------------------Hoop Movements------------------//
 
@@ -386,7 +356,6 @@ window.addEventListener("keydown", function(e) {
     }
 }, false);
 
-
 //-------Set up arrow functionality----------//
 
 function keyboardControls() {
@@ -433,6 +402,8 @@ function keyboardControls() {
     game.hoops.push(hoop1, hoop2, hoop3, hoop4, hoop5, hoop6);
     game.bottle.push(goal1, goal2, goal3, goal4, goal5, goal6, goal7);
     game.jr = new Jr();
+    var x = document.getElementById("myAudio");
+    var y = document.getElementById("baby");
     
     game.drawBoard();
     keyboardControls();
@@ -456,10 +427,17 @@ function keyboardControls() {
           if(confirm('Game Over! You Hit a Backboard.')){
               window.location.reload();
           }
-        
       }
 
-    };
+//---------Audio----------//
+
+    function playAudio(){
+        x.play();
+    }
+    function playBaby(){
+        y.play();
+        } 
+};
     
     
     
